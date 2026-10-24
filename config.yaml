@@ -1,0 +1,129 @@
+# BIST Analiz - merkezi yapılandırma
+# Tüm eşik değerleri ve ayarlar burada tutulur; kod içinde sabit sayı kullanılmaz.
+
+database:
+  path: data/bist.db
+
+data:
+  history_years: 10            # İlk yüklemede çekilecek geçmiş (yıl)
+  index_ticker: XU100.IS       # BIST 100 endeksi (Yahoo sembolü)
+  ticker_suffix: .IS           # Hisse sembollerine eklenen borsa eki
+  auto_adjust: false           # false: ham fiyat + ayrıca adj_close saklanır
+  weekly_rule: W-FRI           # Haftalık mumlar Cuma ile biten haftalar
+
+fetch:
+  batch_size: 20               # Tek yfinance isteğinde kaç sembol
+  max_retries: 3               # Başarısız sembol için tekrar deneme sayısı
+  retry_wait_seconds: 5        # Denemeler arası bekleme (her denemede katlanır)
+  pause_between_batches_seconds: 1
+  incremental_overlap_days: 7  # Güncellemede son tarihten kaç gün geriye gidilsin
+                               # (geç gelen düzeltmeleri yakalamak için)
+
+quality:
+  min_daily_rows: 60           # Bundan az günlük satırı olan sembol uyarı alır
+  max_missing_close_ratio: 0.05  # Kapanışı boş satır oranı bu değeri aşarsa uyarı
+  max_daily_abs_return: 0.5    # |günlük getiri| bunu aşarsa şüpheli veri olarak işaretlenir
+
+# Portal eşikleri: PLAN.md'ye göre doldurulacak.
+thresholds:
+  portal_1: {}
+  portal_2: {}
+  portal_3: {}
+  portal_4: {}
+  portal_5: {}
+
+# BIST 100 bileşenleri (eksiz). Endeks bileşimi her çeyrekte değişir;
+# Borsa İstanbul'un güncel listesiyle kontrol edip burayı güncelleyin.
+# Not: Sadece bugünkü bileşenleri 10 yıl geriye çekmek "hayatta kalma
+# yanlılığı" (survivorship bias) yaratır; backtest yaparken bunu unutmayın.
+bist100_tickers:
+  - AEFES
+  - AGHOL
+  - AHGAZ
+  - AKBNK
+  - AKSA
+  - AKSEN
+  - ALARK
+  - ALFAS
+  - ALTNY
+  - ANSGR
+  - ARCLK
+  - ASELS
+  - ASTOR
+  - BERA
+  - BIMAS
+  - BRSAN
+  - BRYAT
+  - BSOKE
+  - BTCIM
+  - CANTE
+  - CCOLA
+  - CIMSA
+  - CLEBI
+  - CWENE
+  - DOAS
+  - DOHOL
+  - DSTKF
+  - ECILC
+  - EFORC
+  - EGEEN
+  - EKGYO
+  - ENERY
+  - ENJSA
+  - ENKAI
+  - EREGL
+  - EUPWR
+  - FROTO
+  - GARAN
+  - GESAN
+  - GOLTS
+  - GRSEL
+  - GUBRF
+  - HALKB
+  - HEKTS
+  - ISCTR
+  - ISMEN
+  - KCAER
+  - KCHOL
+  - KONTR
+  - KONYA
+  - KOZAA
+  - KOZAL
+  - KRDMD
+  - KTLEV
+  - LMKDC
+  - MAVI
+  - MGROS
+  - MIATK
+  - MPARK
+  - OBAMS
+  - ODAS
+  - OTKAR
+  - OYAKC
+  - PASEU
+  - PETKM
+  - PGSUS
+  - REEDR
+  - SAHOL
+  - SASA
+  - SISE
+  - SKBNK
+  - SMRTG
+  - SOKM
+  - TABGD
+  - TAVHL
+  - TCELL
+  - THYAO
+  - TKFEN
+  - TOASO
+  - TSKB
+  - TTKOM
+  - TTRAK
+  - TUPRS
+  - TURSG
+  - ULKER
+  - VAKBN
+  - VESTL
+  - YEOTK
+  - YKBNK
+  - ZOREN
