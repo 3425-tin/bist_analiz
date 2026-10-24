@@ -8,4 +8,8 @@ if [ ! -d .venv ]; then
     .venv/bin/python -m pip install --upgrade pip
     .venv/bin/python -m pip install -r requirements.txt
 fi
+# Streamlit ilk acilista e-posta sorar; bos kimlik dosyasi ile atla
+if [ ! -f ~/.streamlit/credentials.toml ]; then
+    mkdir -p ~/.streamlit && printf '[general]\nemail = ""\n' > ~/.streamlit/credentials.toml
+fi
 exec .venv/bin/python -m streamlit run app.py

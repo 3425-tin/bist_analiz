@@ -12,5 +12,11 @@ if not exist .venv (
     .venv\Scripts\python -m pip install --upgrade pip
     .venv\Scripts\python -m pip install -r requirements.txt
 )
+REM Streamlit ilk acilista e-posta sorar; bos kimlik dosyasi ile atla
+if not exist "%USERPROFILE%\.streamlit\credentials.toml" (
+    mkdir "%USERPROFILE%\.streamlit" 2>nul
+    > "%USERPROFILE%\.streamlit\credentials.toml" echo [general]
+    >> "%USERPROFILE%\.streamlit\credentials.toml" echo email = ""
+)
 .venv\Scripts\python -m streamlit run app.py
 pause
